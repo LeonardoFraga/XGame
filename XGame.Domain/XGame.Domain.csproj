@@ -54,6 +54,7 @@
     <Compile Include="Enums\PlayerStatus.cs" />
     <Compile Include="Interfaces\Arguments\IRequest.cs" />
     <Compile Include="Interfaces\Arguments\IResponse.cs" />
+    <Compile Include="Interfaces\Repositories\IPlayerRepository.cs" />
     <Compile Include="Interfaces\Services\IPlatformService.cs" />
     <Compile Include="Interfaces\Services\IPlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,8 +62,6 @@
     <Compile Include="ValueObjects\Email.cs" />
     <Compile Include="ValueObjects\Name.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
