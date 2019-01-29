@@ -1,11 +1,13 @@
-﻿using System;
+﻿using prmToolkit.NotificationPattern;
+using System;
 using XGame.Domain.Arguments.Player;
 using XGame.Domain.Interfaces.Repositories;
 using XGame.Domain.Interfaces.Services;
+using XGame.Domain.Resources;
 
 namespace XGame.Domain.Services
 {
-    public class PlayerService : IPlayerService
+    public class PlayerService : Notifiable, IPlayerService
     {
         private readonly IPlayerRepository _playerService;
 
@@ -23,33 +25,14 @@ namespace XGame.Domain.Services
 
         public AuthenticatePlayerReponse AuthenticatePlayer(AuthenticatePlayerRequest request)
         {
-
             if (request == null)
             {
-                throw new ArgumentNullException("AuthenticatePlayerRequest is mandatory.");
-            }
-
-            if (string.IsNullOrEmpty(request.senha))
-            {
-                throw new ArgumentException($"The field {nameof(request.senha)} is required.");
-            }
-
-            if (request.senha.Length <= 6)
-            {
-                throw new ArgumentException($"The field {nameof(request.senha)} must have six characters or more.");
-            }
-
-            if (string.IsNullOrEmpty(request.email))
-            {
-                throw new ArgumentException($"The field {nameof(request.email)} is required.");
-            }
-
-            if (IsEmail(request.email))
-            {
-                throw new ArgumentException($"The field {nameof(request.email)} isn't a valid e-mail");
+                AddNotification("AuthenticatePlayerRequest", 
+                    string.Format(NotificationMessages.X0_IS_MANDATORY, nameof(AuthenticatePlayerRequest)));
             }
 
             var response = _playerService.AuthenticatePlayer(request);
+            //AddNotifications(Player)
 
             return response;
 
